@@ -32,8 +32,15 @@ app.get("/urls/:shortURL", (req, res) => {
   const templateVars = { shortURL: req.params.shortURL, longURL: urlDatabase[a]};
   res.render("urls_show", templateVars);
 });
+app.post("/urls", (req, res) => {
+  console.log(req.body);  // Log the POST request body to the console
+  res.send("Ok");         // Respond with 'Ok' (we will replace this)
+});
 
-
+function generateRandomString() {
+  console.log(Math.random().toString(36).slice(7))
+}
+generateRandomString();
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
