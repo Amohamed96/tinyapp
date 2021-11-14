@@ -68,7 +68,7 @@ app.get("/login", (req, res) => {
 });
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
-  if (!emailCheck(email, users)) { // Tells user if their email is not found
+  if (!emailCheck(email, users)) { 
     res.status(403).send("USER NOT FOUND!");
     return;
   }
@@ -106,7 +106,6 @@ app.post("/register", (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = bcrypt.hashSync(req.body.password, 10);
 
-  // error for registration
   /////////////////////////////////// EMAIL CHECK
   emailCheck(email, users);
   if (getUserByEmail(email, users)) { //If the email is already taken
@@ -146,7 +145,6 @@ app.post("/urls", (req, res) => {
   res.redirect(`/urls/${shortUrl}`);
 });
 app.get("/urls/new", (req, res) => {
-  // let user = users[req.session.user_id];
   if (!req.session.user_id) {
     return res.redirect("/login");
   }
@@ -206,7 +204,6 @@ app.post("/urls/:shortURL/delete", (req, res) => {
 ///////////////// EDIT URL ///////////////////////
 app.post("/urls/:id", (req, res) => {
   let newURL = req.body.newURL;
-  //TODO: Check if user is logged in, Check if logged in user owns url to be edited or deleted
   const user = users[req.session.user_id];
   const shortURL = req.params.id;
   if (!user) {
